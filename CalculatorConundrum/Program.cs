@@ -1,5 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
+using System.Security.Cryptography.X509Certificates;
+
 string output = SimpleCalculator.Calculate(23, 25, "+");
 Console.WriteLine(output);
 Console.WriteLine();
@@ -27,17 +29,12 @@ public class SimpleCalculator
     public static string Calculate(int operand1, int operand2, string operation)
     {
         string output = "";
-        int answer = 0;
         try
         {
-
             if (operation == null)
             {
                 throw new ArgumentNullException(nameof(operation));
             }
-
-            //answer = Int16.Parse(operand1 operation operand2);
-
 
             if (operation == "")
             {
@@ -53,8 +50,13 @@ public class SimpleCalculator
 
             if (operand2 == 0 && operation == "/")
             {
-                throw new DivideByZeroException(nameof(operand2));
+                throw new DivideByZeroException();
             }
+
+            Func<int, int> answer = (x =>
+            {
+                return operand1 * operand2;
+            });
 
             output = $"{operand1} {operation} {operand2} = {answer}";
 
@@ -70,16 +72,18 @@ public class SimpleCalculator
         catch(ArgumentOutOfRangeException e)
         {
             Console.WriteLine($"Argument out of range exception {e.Message}");
-            
+            throw;
 
         }
         catch (DivideByZeroException e)
         {
-            Console.WriteLine("Division by zero is not allowed.");
+            return "Division by zero is not allowed.";
+            
         }
         catch (ArgumentException e) 
         {
             Console.WriteLine($"Argument exception {e.Message}");
+            throw;
             
         }
 
