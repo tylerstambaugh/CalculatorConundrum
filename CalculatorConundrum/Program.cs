@@ -65,14 +65,14 @@ public class SimpleCalculator
         catch (ArgumentNullException e)
         {
             Console.WriteLine($"Argument null exception {e.Message}");
-            throw;
+            //throw;
             
         }
         
         catch(ArgumentOutOfRangeException e)
         {
             Console.WriteLine($"Argument out of range exception {e.Message}");
-            throw;
+            //throw;
 
         }
         catch (DivideByZeroException e)
@@ -83,7 +83,7 @@ public class SimpleCalculator
         catch (ArgumentException e) 
         {
             Console.WriteLine($"Argument exception {e.Message}");
-            throw;
+           // throw;
             
         }
 
